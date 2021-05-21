@@ -32,6 +32,7 @@ using namespace glm;
 // Текущие переменные для модели
 bool leftButtonPressed = false;
 bool rightPressed = false;
+bool pause = false;
 double lastCursorPosX = 0.0;
 double lastCursorPosY = 0.0;
 
@@ -56,11 +57,8 @@ void glfwKeyCallback(GLFWwindow* window, int key, int scancode, int action, int 
 void glfwMouseButtonCallback(GLFWwindow* window, int button, int state, int mod) {
     // обработка левой кнопки
     if(button == GLFW_MOUSE_BUTTON_1){
-        if(state == GLFW_PRESS){
-            leftButtonPressed = true;
-        }else{
-            leftButtonPressed = false;
-        }
+        if(state == GLFW_PRESS)
+            pause = !pause;
     }
     // обработка правой кнопки
     if(button == GLFW_MOUSE_BUTTON_2){
@@ -223,6 +221,13 @@ int main(int argc, char *argv[]) {
     
     // текущее время
     while (!glfwWindowShouldClose(window)){
+
+        if (pause)
+        {
+            glfwPollEvents();
+            continue;
+        }
+
         // wipe the drawing surface clear
         glClearColor(0.2, 0.2, 0.2, 1.0);
         glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

@@ -49,7 +49,7 @@ void DrawManager::createDecoder(){
 #ifdef _WIN32
     std::string filePath = "res\\big-buck-bunny_trailer.webm";
 #else
-    std::string filePath = "res/with_alpha_vp9-2.webm";
+    std::string filePath = "res/big-buck-bunny_trailer.webm";
 #endif
     _decoder = make_shared<WebMVideoDecoder>(filePath);
     
